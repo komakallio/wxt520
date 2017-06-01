@@ -7,7 +7,9 @@ if __name__ == '__main__':
     while 1:
         line = wxt.readline()
         if line:
-            data = WXT520.message_to_dict(line)
+            data = wxt520.WXT520.message_to_dict(line)
             r = requests.post('http://localhost:9001/api/', json=data)
             if r.status_code != 200:
                 print 'Received error %d' % r.status_code
+                print r.headers
+                print r.text

@@ -44,7 +44,7 @@ class WXT520:
     def crc16(msg):
         c = 0
         for a in msg:
-            c ^= a
+            c ^= ord(a)
             for _ in range(8):
                 if c & 1:
                     c >>= 1

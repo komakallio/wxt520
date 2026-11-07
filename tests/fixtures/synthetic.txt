@@ -1,0 +1,4 @@
+0r3,Rc=0.00M,Rd=0s,Ri=0.0M,Hc=0.0M,Hd=0s,Hi=0.0M,Rp=0.0M,Hp=0.0M
+0r3,Rc=1.25M,Rd=340s,Ri=2.4M,Hc=0.0M,Hd=0s,Hi=0.0M,Rp=8.1M,Hp=0.0M
+0r1,Dn=000#,Dm=000#,Dx=000#,Sn=0.0#,Sm=0.0#,Sx=0.0#
+0r2,Ta=-12.3C,Tp=-11.9C,Ua=97.1P,Pa=1003.4H

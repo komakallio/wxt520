@@ -42,9 +42,12 @@ class WXT520:
 
     @staticmethod
     def crc16(msg):
+        """Vaisala 3-character CRC of msg (bytes or ASCII str), returned as bytes."""
+        if not isinstance(msg, (bytes, bytearray)):
+            msg = msg.encode('ascii')
         c = 0
-        for a in msg:
-            c ^= ord(a)
+        for a in bytearray(msg):
+            c ^= a
             for _ in range(8):
                 if c & 1:
                     c >>= 1
@@ -52,7 +55,7 @@ class WXT520:
                 else:
                     c >>= 1
         bytes_ = [0x40 | (c >> 12), 0x40 | ((c >> 6) & 0x3f), 0x40 | (c & 0x3f)]
-        return "".join(map(chr, bytes_)).encode()
+        return bytes(bytearray(bytes_))
 
     @staticmethod
     def check_crc(message):
@@ -163,8 +166,8 @@ class WXT520:
         self.ser = serial.Serial(port, baudrate, timeout=timeout)
         self.address = address
         time.sleep(.1)
-        self.ser.flushInput()
-        self.ser.write(b'0XU,M=a\r\n')
+        self.ser.reset_input_buffer()
+        self.ser.write(address.encode('ascii') + b'XU,M=a\r\n')
         response = self.ser.readline()
         if not b',M=a' in response:
             logging.error('No answer to ASCII automatic mode setting!')

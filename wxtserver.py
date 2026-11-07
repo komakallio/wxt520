@@ -5,6 +5,7 @@ Python 3 (3.5+). Keeps running through serial and HTTP errors.
 import argparse
 import json
 import logging
+import sys
 import time
 
 import requests
@@ -56,7 +57,8 @@ def post(url, payload, timeout):
 
 def main():
     args = parse_args()
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s',
+                        stream=sys.stdout)
     wxt = open_wxt(args.port, args.address)
     logging.info('WXT520 open on %s', args.port)
     while True:
